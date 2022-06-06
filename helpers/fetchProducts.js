@@ -4,7 +4,7 @@ const fetchProducts = async (computador) => {
   }
 
   try {
-    var endPoint = (`https://api.mercadolibre.com/sites/MLB/search?q=${computador}`);
+    const endPoint = (`https://api.mercadolibre.com/sites/MLB/search?q=${computador}`);
    
     const fetchUrl = await fetch(endPoint);
     const response = await fetchUrl.json();
