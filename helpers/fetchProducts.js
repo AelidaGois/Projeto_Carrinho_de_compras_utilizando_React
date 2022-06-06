@@ -1,8 +1,4 @@
 const fetchProducts = async (computador) => {
-  if (!fetchProducts) {
-    throw new Error('You must provide an url');
-  }
-
   try {
     const endPoint = (`https://api.mercadolibre.com/sites/MLB/search?q=${computador}`);
    
