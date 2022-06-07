@@ -8,7 +8,8 @@ const fetchItem = async (id) => {
   } catch (error) {
     return error;
   }
-};
+} 
+fetchItem('MLB1341706310');
 
 if (typeof module !== 'undefined') {
   module.exports = {
