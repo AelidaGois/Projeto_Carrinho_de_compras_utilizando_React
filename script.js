@@ -32,7 +32,7 @@ function appendItems(objeto) {
 }
 
 const cartItemClickListener = async (event) => {
-
+  event.target.closest('li').remove();
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
@@ -57,7 +57,6 @@ const getbuttons = () => {
   for (let i = 0; i < buttons.length; i += 1) {
     buttons[i].addEventListener('click', (event) => {
       const getId = event.target.parentNode.firstChild.innerText;
-      console.log(getId);
       adicionarProdutoCart(getId);
     });
   }
@@ -79,4 +78,4 @@ async function adicionaItems() {
 
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
-window.onload = cartItemClickListener;
+window.onload = {};
