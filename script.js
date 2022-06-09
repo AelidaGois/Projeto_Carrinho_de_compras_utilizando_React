@@ -32,7 +32,7 @@ function appendItems(objeto) {
 }
 
 const cartItemClickListener = async (event) => {
-  event.target.closest('li').remove();
+  event.target.remove();
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
