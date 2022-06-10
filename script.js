@@ -43,12 +43,39 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   return li;
 };
 
+const getCartItems = () => document.querySelector('.cart__items');
+
+const itemsLocalStorage = () => {
+  const arrayItem = [];
+  const cartItem = getCartItems().childNodes;
+  cartItem.forEach((element) => {
+    arrayItem.push(element.innerText);
+  });
+  return JSON.stringify(arrayItem);
+};
+
+const transformarParaArray = () => {
+  const savedCart = getSavedCartItems();
+  if (savedCart) {
+    const returnArray = JSON.parse(savedCart);
+    const cartItems = getCartItems();
+    returnArray.forEach((arr) => {
+      const createLi = document.createElement('li');
+      createLi.className = 'cart__item';
+      createLi.innerText = arr;
+      cartItems.appendChild(createLi);
+      createLi.addEventListener('click', cartItemClickListener);
+    });
+  }
+};
+
 const adicionarProdutoCart = async (product) => {
   const itemFetch = await fetchItem(product);
   const { id, title, price } = itemFetch;
   const obj = { sku: id, name: title, salePrice: price };
   const elementLi = createCartItemElement(obj);
-  document.querySelector('.cart__items').appendChild(elementLi);
+  getCartItems().appendChild(elementLi);
+  saveCartItems(itemsLocalStorage());
 };
 
 const getbuttons = () => {
@@ -76,6 +103,6 @@ async function adicionaItems() {
   // ela percorreu todo o array de Produtos e chamou a função AppendItems adicionando cada produto como parâmetro da função.
 } adicionaItems();
 
-const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
-
+// const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
+transformarParaArray();
 window.onload = {};
