@@ -1,3 +1,6 @@
+let valorTotal = 0;
+const createTotalProducts = document.createElement('p');
+
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -31,18 +34,6 @@ function appendItems(objeto) {
   // pegando o retorno de createProductItemElement e colocando como filho de 'Items'.
 }
 
-const cartItemClickListener = async (event) => {
-  event.target.remove();
-};
-
-const createCartItemElement = ({ sku, name, salePrice }) => {
-  const li = document.createElement('li');
-  li.className = 'cart__item';
-  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
-  li.addEventListener('click', cartItemClickListener);
-  return li;
-};
-
 const getCartItems = () => document.querySelector('.cart__items');
 
 const itemsLocalStorage = () => {
@@ -52,6 +43,29 @@ const itemsLocalStorage = () => {
     arrayItem.push(element.innerText);
   });
   return JSON.stringify(arrayItem);
+};
+
+const createElementSum = (price) => {
+  const getCart = document.querySelector('.cart');
+  createTotalProducts.className = 'total-price';
+  createTotalProducts.innerText = price;
+  getCart.appendChild(createTotalProducts);
+};
+
+const getSum = (price) => {
+  valorTotal += parseFloat(price);
+  createElementSum(valorTotal);
+};
+
+const getSubtraction = (price) => {
+  valorTotal -= parseFloat(price);
+  createElementSum(valorTotal);
+};
+
+const cartItemClickListener = async (event) => {
+  event.target.remove();
+  const valueProduct = parseFloat(event.target.innerText.split('$')[1]);
+  getSubtraction(valueProduct);
 };
 
 const transformarParaArray = () => {
@@ -69,6 +83,14 @@ const transformarParaArray = () => {
   }
 };
 
+const createCartItemElement = ({ sku, name, salePrice }) => {
+  const li = document.createElement('li');
+  li.className = 'cart__item';
+  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
+  li.addEventListener('click', cartItemClickListener);
+  return li;
+};
+
 const adicionarProdutoCart = async (product) => {
   const itemFetch = await fetchItem(product);
   const { id, title, price } = itemFetch;
@@ -76,6 +98,7 @@ const adicionarProdutoCart = async (product) => {
   const elementLi = createCartItemElement(obj);
   getCartItems().appendChild(elementLi);
   saveCartItems(itemsLocalStorage());
+  getSum(obj.salePrice);
 };
 
 const getbuttons = () => {
