@@ -1,6 +1,5 @@
 let valorTotal = 0;
 const createTotalProducts = document.createElement('p');
-const getCartItems2 = document.querySelector('.cart__items');
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
@@ -71,7 +70,7 @@ const cartItemClickListener = async (event) => {
 
 const esvaziarCarrinho = () => {
   const getEmptyCart = document.querySelector('.empty-cart');
-
+  const getCartItems2 = document.querySelector('.cart__items');
   getEmptyCart.addEventListener('click', () => {
     localStorage.clear();
     getCartItems2.innerText = '';
