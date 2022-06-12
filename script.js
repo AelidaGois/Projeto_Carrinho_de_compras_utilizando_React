@@ -74,6 +74,7 @@ const esvaziarCarrinho = () => {
   getEmptyCart.addEventListener('click', () => {
     localStorage.clear();
     getCartItems2.innerText = '';
+    createTotalProducts.innerText = 0;
   });
 };
 esvaziarCarrinho();
