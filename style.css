@@ -136,8 +136,13 @@ body {
 }
 
 .cart .cart__items {
-  height: 500px;
+  height: 460px;
+  padding: 50px 50px 0;
   overflow-y: scroll;
+}
+
+.cart__items .cart__item {
+  padding-bottom: 30px;
 }
 
 .empty-cart {
@@ -146,4 +151,11 @@ body {
   margin: 0 auto;
   border: 2px solid rgb(5, 52, 219);
   background-color: rgb(249, 249, 246);
+}
+
+.total-price {
+  text-align: center;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: 600;
 }

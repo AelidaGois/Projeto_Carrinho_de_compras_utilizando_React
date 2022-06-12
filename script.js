@@ -1,5 +1,6 @@
 let valorTotal = 0;
 const createTotalProducts = document.createElement('p');
+const getCartItems2 = document.querySelector('.cart__items');
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
@@ -67,6 +68,16 @@ const cartItemClickListener = async (event) => {
   const valueProduct = parseFloat(event.target.innerText.split('$')[1]);
   getSubtraction(valueProduct);
 };
+
+const esvaziarCarrinho = () => {
+  const getEmptyCart = document.querySelector('.empty-cart');
+
+  getEmptyCart.addEventListener('click', () => {
+    localStorage.clear();
+    getCartItems2.innerText = '';
+  });
+};
+esvaziarCarrinho();
 
 const transformarParaArray = () => {
   const savedCart = getSavedCartItems();
