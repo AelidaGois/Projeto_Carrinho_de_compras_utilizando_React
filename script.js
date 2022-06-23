@@ -26,6 +26,16 @@ const createProductItemElement = ({ sku, name, image }) => {
   return section;
 };
 
+async function Products(computador) {
+  const div = document.createElement('div');
+    div.className = 'loading';
+    div.innerHTML = 'carregando...';
+    document.querySelector('.items').appendChild(div);
+  const resposta = await fetchProducts(computador);
+  document.querySelector('.loading').remove();
+  resposta.results.forEach((item) => createProductItemElement(item));
+}Products();
+
 function appendItems(objeto) {
   // adiciona Item como filho de Items.
   const items = document.querySelector('.items');
